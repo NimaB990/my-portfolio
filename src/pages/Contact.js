@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import emailjs from '@emailjs/browser';
 import { FaLinkedin, FaGithub, FaEnvelope, FaPhoneAlt, FaMapMarkerAlt } from 'react-icons/fa';
-import { motion } from 'framer-motion';
+// import { motion } from 'framer-motion';
 
 const Contact = () => {
   const form = useRef();
