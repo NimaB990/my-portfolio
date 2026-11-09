@@ -9,7 +9,9 @@ In the project directory, you can run:
 ### `npm start`
 
 Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Open [http://localhost:3001](http://localhost:3001) to view the portfolio in your browser.
+
+The development port is configured in `.env.development` to avoid conflicting with other apps on port 3000.
 
 The page will reload when you make changes.\
 You may also see any lint errors in the console.

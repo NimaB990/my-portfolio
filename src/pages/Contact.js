@@ -1,100 +1,52 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import emailjs from '@emailjs/browser';
-import { FaLinkedin, FaGithub, FaEnvelope, FaPhoneAlt, FaMapMarkerAlt } from 'react-icons/fa';
-// import { motion } from 'framer-motion';
+import { FiArrowUpRight, FiArrowRight, FiGithub, FiLinkedin, FiMail, FiMapPin, FiPhone, FiCheckCircle, FiAlertCircle } from 'react-icons/fi';
 
-const Contact = () => {
-  const form = useRef();
+export default function Contact() {
+  const form = useRef(null);
+  const sending = useRef(false);
+  const [status, setStatus] = useState('idle');
 
-  const sendEmail = (e) => {
-    e.preventDefault();
-
-    emailjs.sendForm(
-      'service_p7oghbe',    // මෙතනට ඔබේ Service ID එක දාන්න
-      'template_u8eddqk',   // මෙතනට ඔබේ Template ID එක දාන්න
-      form.current, 
-      '9cC69p0qGWA51Yoj3'     // මෙතනට ඔබේ Public Key එක දාන්න
-    )
-    .then((result) => {
-        alert("Message Sent Successfully!");
-        form.current.reset(); // සාර්ථකව යැවූ පසු Form එක හිස් කරනවා
-    }, (error) => {
-        alert("Failed to send, please try again.");
-    });
+  const sendEmail = async event => {
+    event.preventDefault();
+    if (sending.current) return;
+    sending.current = true;
+    setStatus('sending');
+    try {
+      await emailjs.sendForm('service_p7oghbe', 'template_u8eddqk', form.current, '9cC69p0qGWA51Yoj3');
+      form.current.reset();
+      setStatus('success');
+    } catch {
+      setStatus('error');
+    } finally {
+      sending.current = false;
+    }
   };
 
   return (
-    <section className="container mx-auto px-6 md:px-16 py-20 min-h-[70vh]">
-      <div className="text-center mb-16">
-        <h2 className="text-5xl font-extrabold text-white mb-4">Get In Touch</h2>
-        <p className="text-gray-400">Let's build something amazing together.</p>
-      </div>
-      
-      <div className="grid md:grid-cols-2 gap-12">
-        {/* වම් පැත්ත: Contact Cards */}
-        <div className="space-y-6">
-          <ContactCard icon={<FaEnvelope />} title="Email" value="Nimanthabandara990@gmail.com" />
-          <ContactCard icon={<FaPhoneAlt />} title="Phone" value="+94776400964" />
-          <ContactCard icon={<FaMapMarkerAlt />} title="Location" value="Sri Lanka" />
-          
-          <div className="flex gap-4 pt-6">
-            <SocialLink href="https://www.linkedin.com/in/nimantha-bandara-984252312/" icon={<FaLinkedin />} />
-            <SocialLink href="https://github.com/NimaB990" icon={<FaGithub />} />
+    <section id="contact" className="section contact-section" aria-labelledby="contact-title">
+      <div className="shell contact-grid">
+        <div className="contact-copy"><p className="eyebrow">03 / GET IN TOUCH</p><h2 id="contact-title">Great things start<br />with a <span className="accent-text">conversation.</span></h2>
+          <p className="contact-intro">Have a project in mind, an opportunity to share, or just want to talk tech? I'd love to hear from you.</p>
+          <div className="contact-details">
+            <a href="mailto:Nimanthabandara990@gmail.com"><FiMail aria-hidden="true" /><span><small>EMAIL ME</small>Nimanthabandara990@gmail.com</span><FiArrowUpRight aria-hidden="true" /></a>
+            <a href="tel:+94776400964"><FiPhone aria-hidden="true" /><span><small>GIVE ME A CALL</small>+94 77 640 0964</span><FiArrowUpRight aria-hidden="true" /></a>
+            <div><FiMapPin aria-hidden="true" /><span><small>BASED IN</small>Sri Lanka</span></div>
           </div>
+          <div className="contact-socials"><a href="https://github.com/NimaB990" target="_blank" rel="noopener noreferrer"><FiGithub aria-hidden="true" /> GitHub <FiArrowUpRight aria-hidden="true" /></a><a href="https://www.linkedin.com/in/nimantha-bandara-984252312/" target="_blank" rel="noopener noreferrer"><FiLinkedin aria-hidden="true" /> LinkedIn <FiArrowUpRight aria-hidden="true" /></a></div>
         </div>
-
-        {/* දකුණු පැත්ත: Modern Form (EmailJS) */}
-        <div className="bg-[#161922] p-8 rounded-3xl border border-[#2a2d3a]">
-          <form ref={form} onSubmit={sendEmail} className="space-y-5">
-            <input 
-              type="text" 
-              name="user_name" 
-              placeholder="Your Name" 
-              required 
-              className="w-full bg-[#111319] text-white border border-[#2a2d3a] p-4 rounded-xl focus:border-[#ff5d4b] outline-none transition-all" 
-            />
-            <input 
-              type="email" 
-              name="user_email" 
-              placeholder="Your Email" 
-              required 
-              className="w-full bg-[#111319] text-white border border-[#2a2d3a] p-4 rounded-xl focus:border-[#ff5d4b] outline-none transition-all" 
-            />
-            <textarea 
-              name="message" 
-              rows="4" 
-              placeholder="Your Message" 
-              required 
-              className="w-full bg-[#111319] text-white border border-[#2a2d3a] p-4 rounded-xl focus:border-[#ff5d4b] outline-none transition-all resize-none"
-            ></textarea>
-            <button 
-              type="submit" 
-              className="bg-gradient-to-r from-[#ff5d4b] to-[#ff9b4b] text-white py-4 rounded-xl font-bold hover:opacity-90 transition-opacity w-full"
-            >
-              Send Message
-            </button>
-          </form>
-        </div>
+        <form ref={form} onSubmit={sendEmail} className="contact-form" aria-busy={status === 'sending'}>
+          <h3>Send a message<span>.</span></h3><p>Tell me a little about what you're working on.</p>
+          <label htmlFor="contact-name">Your name</label><input id="contact-name" name="user_name" autoComplete="name" placeholder="How should I call you?" required disabled={status === 'sending'} />
+          <label htmlFor="contact-email">Email address</label><input id="contact-email" name="user_email" type="email" autoComplete="email" placeholder="you@example.com" required disabled={status === 'sending'} />
+          <label htmlFor="contact-message">Your message</label><textarea id="contact-message" name="message" rows="5" placeholder="A project, an idea, or a simple hello..." required disabled={status === 'sending'} />
+          <button type="submit" className="button button-primary" disabled={status === 'sending'}>{status === 'sending' ? 'Sending message...' : 'Send message'}<FiArrowRight aria-hidden="true" /></button>
+          <div className={`form-status ${status}`} role="status" aria-live="polite">
+            {status === 'success' && <><FiCheckCircle aria-hidden="true" /> Thanks! Your message has been sent.</>}
+            {status === 'error' && <><FiAlertCircle aria-hidden="true" /> Your message couldn't be sent. Please try again or email me directly.</>}
+          </div>
+        </form>
       </div>
     </section>
   );
-};
-
-// Components
-const ContactCard = ({ icon, title, value }) => (
-  <div className="bg-[#161922] p-6 rounded-2xl border border-[#2a2d3a] flex items-center gap-4 hover:border-[#ff5d4b] transition-all">
-    <div className="text-[#ff5d4b] text-2xl">{icon}</div>
-    <div>
-      <p className="text-gray-500 text-xs uppercase font-bold tracking-widest">{title}</p>
-      <p className="text-white font-medium">{value}</p>
-    </div>
-  </div>
-);
-
-const SocialLink = ({ href, icon }) => (
-  <a href={href} className="bg-[#161922] p-4 rounded-full text-white text-2xl hover:bg-[#ff5d4b] transition-all">
-    {icon}
-  </a>
-);
-
-export default Contact;
+}

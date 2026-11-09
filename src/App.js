@@ -1,68 +1,86 @@
-import React, { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import bgImage from './assets/background3.jpg'; // නිවැරදි මාවත
-
-// Pages
+import React, { useEffect, useState } from 'react';
+import { MotionConfig } from 'framer-motion';
+import { FiArrowUpRight, FiArrowUp, FiMenu, FiX } from 'react-icons/fi';
 import Home from './pages/Home';
 import About from './pages/About';
 import Projects from './pages/Projects';
 import Contact from './pages/Contact';
 
-const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  return (
-    <nav className="w-full py-8 z-50">
-      <div className="container mx-auto px-6 md:px-16 flex justify-between items-center">
-        <Link to="/" className="text-2xl font-bold text-white tracking-tighter">
-          Nimantha<span className="text-[#ff5d4b]">.</span>
-        </Link>
-        <ul className="hidden md:flex space-x-12 text-sm font-bold text-white uppercase tracking-widest">
-          <li><Link to="/" className="hover:text-[#ff5d4b] transition-colors">Home</Link></li>
-          <li><Link to="/about" className="hover:text-[#ff5d4b] transition-colors">About</Link></li>
-          <li><Link to="/projects" className="hover:text-[#ff5d4b] transition-colors">Projects</Link></li>
-          <li><Link to="/contact" className="hover:text-[#ff5d4b] transition-colors">Contacts</Link></li>
-        </ul>
-        <button className="md:hidden text-white" onClick={() => setIsOpen(!isOpen)}>
-          <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            {isOpen ? <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" /> : <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7" />}
-          </svg>
-        </button>
-      </div>
-      {isOpen && (
-        <div className="md:hidden bg-black/60 py-6 text-center space-y-4 text-white font-bold uppercase tracking-widest text-sm">
-          <Link to="/" onClick={() => setIsOpen(false)} className="block hover:text-[#ff5d4b]">Home</Link>
-          <Link to="/about" onClick={() => setIsOpen(false)} className="block hover:text-[#ff5d4b]">About</Link>
-          <Link to="/projects" onClick={() => setIsOpen(false)} className="block hover:text-[#ff5d4b]">Projects</Link>
-          <Link to="/contact" onClick={() => setIsOpen(false)} className="block hover:text-[#ff5d4b]">Contacts</Link>
-        </div>
-      )}
-    </nav>
-  );
-};
+const sections = ['Home', 'About', 'Projects', 'Contact'];
 
-function App() {
+function Navbar() {
+  const [isOpen, setIsOpen] = useState(false);
+  const [active, setActive] = useState('home');
+
+  useEffect(() => {
+    let frame;
+    const updateActive = () => {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(() => {
+        const current = sections.map(name => document.getElementById(name.toLowerCase()))
+          .filter(section => section && section.getBoundingClientRect().top <= 160).pop();
+        const atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4;
+        setActive(atBottom ? 'contact' : current?.id || 'home');
+      });
+    };
+    updateActive();
+    window.addEventListener('scroll', updateActive, { passive: true });
+    window.addEventListener('resize', updateActive);
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener('scroll', updateActive);
+      window.removeEventListener('resize', updateActive);
+    };
+  }, []);
+
+  useEffect(() => {
+    const close = event => {
+      if (event.key === 'Escape') {
+        setIsOpen(false);
+        document.getElementById('menu-toggle')?.focus();
+      }
+    };
+    if (isOpen) document.addEventListener('keydown', close);
+    return () => document.removeEventListener('keydown', close);
+  }, [isOpen]);
+
+  const links = sections.map(section => (
+    <a key={section} href={`#${section.toLowerCase()}`} aria-current={active === section.toLowerCase() ? 'location' : undefined}
+      onClick={() => setIsOpen(false)}>{section}</a>
+  ));
+
   return (
-    <Router>
-      {/* මෙතන තමයි Global Background එක තියෙන්නේ */}
-      <div 
-        className="min-h-screen bg-fixed bg-cover bg-center font-sans" 
-        style={{ backgroundImage: `url(${bgImage})` }}
-      >
-        <div className="min-h-screen bg-black/40"> {/* පසුබිම මත අඳුරු Overlay එකක් */}
-          <Navbar />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/projects" element={<Projects />} />
-            <Route path="/contact" element={<Contact />} />
-          </Routes>
-          <footer className="py-8 text-center text-gray-400 text-sm mt-auto border-t border-white/10">
-            &copy; {new Date().getFullYear()} Chathuranga.Never Give Up.
-          </footer>
-        </div>
-      </div>
-    </Router>
+    <header className="site-header">
+      <nav className="shell nav-inner" aria-label="Main navigation">
+        <a className="brand" href="#home" onClick={() => setIsOpen(false)}>Nimantha<span>.</span></a>
+        <div className="desktop-links">{links}</div>
+        <a className="nav-cta" href="#contact">Let's talk <FiArrowUpRight aria-hidden="true" /></a>
+        <button id="menu-toggle" className="menu-toggle" type="button" aria-expanded={isOpen} aria-controls="mobile-navigation"
+          aria-label={isOpen ? 'Close navigation' : 'Open navigation'} onClick={() => setIsOpen(!isOpen)}>
+          {isOpen ? <FiX /> : <FiMenu />}
+        </button>
+      </nav>
+      <nav id="mobile-navigation" aria-label="Mobile navigation" className="mobile-links" hidden={!isOpen}>{links}</nav>
+    </header>
   );
 }
 
-export default App;
+export default function App() {
+  return (
+    <MotionConfig reducedMotion="user">
+      <a href="#main-content" className="skip-link">Skip to content</a>
+      <Navbar />
+      <main id="main-content" tabIndex="-1">
+        <Home />
+        <About />
+        <Projects />
+        <Contact />
+      </main>
+      <footer className="shell site-footer">
+        <a className="brand" href="#home">Nimantha<span>.</span></a>
+        <p>&copy; {new Date().getFullYear()} Nimantha Bandara. Built with purpose.</p>
+        <a href="#home" className="back-top">Back to top <FiArrowUp aria-hidden="true" /></a>
+      </footer>
+    </MotionConfig>
+  );
+}
