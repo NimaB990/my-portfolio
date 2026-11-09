@@ -48,7 +48,7 @@ const Projects = () => {
       title: "Container Smart Tracking",
       desc: "IoT-based container tracking for Sri Lanka Customs with smart seal monitoring to ensure cargo security.",
       tags: ["IoT", "GPS", "Real-time"],
-      githubLink: "https://github.com/Hasitha123456789/CGO.git",
+      githubLink: "https://github.com/NimaB990/SecureTrackSL.git",
       image: containerImg
     },
   ];
