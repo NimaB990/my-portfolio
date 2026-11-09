@@ -28,7 +28,7 @@ export default function About() {
         <div className="education-heading"><span className="education-icon"><FiBookOpen aria-hidden="true" /></span><div><p className="eyebrow">ALWAYS LEARNING</p><h3 id="education-title">My education</h3></div></div>
         <div className="education-cards">
           <article className="education-item"><div className="education-card-top"><FiBookOpen aria-hidden="true" /><span className="education-status">IN PROGRESS</span></div><h4>NDT — Information Technology</h4><p>Institute of Technology, University of Moratuwa</p></article>
-          <article className="education-item"><div className="education-card-top"><FiAward aria-hidden="true" /><span className="education-status completed">COMPLETED</span></div><h4>Pearson BTEC HND in Digital Technologies</h4><p>Specializing in Cloud Networking</p></article>
+          <article className="education-item"><div className="education-card-top"><FiAward aria-hidden="true" /><span className="education-status completed">COMPLETED</span></div><h4>Pearson BTEC HND in Digital Technologies</h4><p>Specializing in Cloud Networking (Level 5) at SLT-Nebula Institute of Technology</p></article>
         </div>
       </section>
     </section>
