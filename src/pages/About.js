@@ -1,5 +1,5 @@
 import React from 'react';
-import { FiCloud, FiCode, FiDatabase, FiTerminal, FiArrowUpRight } from 'react-icons/fi';
+import { FiCloud, FiCode, FiDatabase, FiTerminal, FiArrowUpRight, FiBookOpen, FiAward } from 'react-icons/fi';
 
 const skills = [
   { icon: FiCloud, title: 'Cloud & DevOps', techs: ['Cloud Networking', 'Docker', 'Git', 'GitHub'] },
@@ -24,10 +24,13 @@ export default function About() {
           <article className="skill-card" key={title}><Icon className="skill-icon" aria-hidden="true" /><h3>{title}</h3><div className="skill-tags">{techs.map(tech => <span key={tech}>{tech}</span>)}</div></article>
         ))}</div>
       </div>
-      <div className="education"><div><p className="eyebrow">ALWAYS LEARNING</p><h3>My education</h3></div>
-        <div className="education-item"><span className="education-status">IN PROGRESS</span><h4>NDT — Software Development & Cloud Networking</h4><p>ITUM, University of Moratuwa</p></div>
-        <div className="education-item"><span className="education-status completed">COMPLETED</span><h4>Pearson BTEC HND in Digital Technologies</h4><p>Specializing in Cloud Networking</p></div>
-      </div>
+      <section className="education" aria-labelledby="education-title">
+        <div className="education-heading"><span className="education-icon"><FiBookOpen aria-hidden="true" /></span><div><p className="eyebrow">ALWAYS LEARNING</p><h3 id="education-title">My education</h3></div></div>
+        <div className="education-cards">
+          <article className="education-item"><div className="education-card-top"><FiBookOpen aria-hidden="true" /><span className="education-status">IN PROGRESS</span></div><h4>NDT — Software Development & Cloud Networking</h4><p>ITUM, University of Moratuwa</p></article>
+          <article className="education-item"><div className="education-card-top"><FiAward aria-hidden="true" /><span className="education-status completed">COMPLETED</span></div><h4>Pearson BTEC HND in Digital Technologies</h4><p>Specializing in Cloud Networking</p></article>
+        </div>
+      </section>
     </section>
   );
 }

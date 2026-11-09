@@ -105,14 +105,19 @@ blockquote { margin: 28px 0; border-left: 2px solid var(--accent); padding: 6px 
 .skill-card h3 { font-size: 1.125rem; font-weight: 600; margin-bottom: 14px; }
 .skill-tags { display: flex; flex-wrap: wrap; gap: 7px; }
 .skill-tags span { border: 1px solid #e2e3e8; border-radius: 4px; padding: 3px 8px; font-size: 0.8125rem; color: #535f70; background: #f5f6f8; }
-.education { display: grid; grid-template-columns: .7fr 1.15fr 1.15fr; gap: 36px; margin-top: 64px; padding-top: 38px; border-top: 1px solid var(--line); }
-.education .eyebrow { font-size: 0.75rem; margin-bottom: 8px; }
-.education h3 { font-size: 1.4375rem; font-weight: 550; letter-spacing: -.5px; }
-.education-item { padding-left: 24px; border-left: 1px solid #d8d9dc; }
-.education-status { color: var(--accent); font-family: var(--mono); font-size: 0.75rem; letter-spacing: 1px; }
-.education-status.completed { color: #27734e; }
-.education h4 { font-size: 1rem; font-weight: 550; margin-top: 8px; line-height: 1.6; }
-.education p { font-size: 0.875rem; color: var(--muted); margin-top: 6px; }
+.education { margin-top: 64px; padding: 36px; border: 1px solid #eac3b7; border-top: 4px solid var(--accent); border-radius: 16px; background: linear-gradient(120deg, #fff0e7, #faf5f1 60%, #f0f2f7); box-shadow: 0 12px 32px #303c4c08; }
+.education-heading { display: flex; align-items: center; gap: 18px; margin-bottom: 28px; }
+.education-icon { display: flex; align-items: center; justify-content: center; flex-shrink: 0; width: 56px; height: 56px; border-radius: 14px; color: #fff; background: var(--accent); font-size: 1.625rem; }
+.education .eyebrow { color: var(--accent); font-size: 0.75rem; margin: 0 0 6px; }
+.education h3 { font-size: clamp(1.75rem, 3vw, 2.25rem); line-height: 1.2; font-weight: 650; letter-spacing: -.8px; }
+.education-cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; }
+.education-item { min-width: 0; padding: 28px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); }
+.education-card-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 20px; }
+.education-card-top > svg { flex-shrink: 0; color: var(--accent); font-size: 1.5rem; }
+.education-status { display: inline-flex; padding: 5px 10px; border-radius: 999px; background: #fff0e9; color: var(--accent); font-family: var(--mono); font-size: 0.75rem; font-weight: 600; letter-spacing: .6px; }
+.education-status.completed { color: #27734e; background: #eaf5ee; }
+.education h4 { font-size: 1.25rem; font-weight: 650; line-height: 1.5; }
+.education-item p { font-size: 1rem; color: var(--muted); margin-top: 12px; }
 .projects-section { background: #f0f2f7; border-block: 1px solid var(--line); }
 .section-heading-row { display: flex; align-items: flex-end; justify-content: space-between; gap: 50px; }
 .section-heading-row > p { max-width: 300px; font-size: 1rem; color: var(--muted); padding-bottom: 4px; }
@@ -215,8 +220,9 @@ blockquote { margin: 28px 0; border-left: 2px solid var(--accent); padding: 6px 
   .section-heading { margin-bottom: 32px; }
   .about-grid { grid-template-columns: 1fr; gap: 32px; }
   .about-story { max-width: 560px; }
-  .education { grid-template-columns: 1fr; gap: 24px; margin-top: 36px; padding-top: 28px; }
-  .education-item { padding-left: 16px; }
+  .education { margin-top: 40px; padding: 24px; }
+  .education-cards { grid-template-columns: 1fr; gap: 16px; }
+  .education-item { padding: 24px; }
   .section-heading-row { display: block; }
   .section-heading-row > p { margin-top: 20px; max-width: 460px; }
   .projects-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
@@ -228,6 +234,10 @@ blockquote { margin: 28px 0; border-left: 2px solid var(--accent); padding: 6px 
   .site-footer p { order: 3; width: 100%; }
 }
 @media (max-width: 480px) {
+  .education { padding: 20px 16px; }
+  .education-heading { gap: 12px; }
+  .education-icon { width: 46px; height: 46px; }
+  .education-item { padding: 20px; }
   .projects-grid { grid-template-columns: 1fr; gap: 24px; }
   .project-body { padding: 24px; }
   .project-body h3 { font-size: 1.375rem; }
