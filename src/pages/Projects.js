@@ -10,6 +10,13 @@ import containerImg from '../assets/container.jpg';
 const Projects = () => {
   const projectData = [
     {
+      title: "Container Smart Tracking",
+      desc: "Our final-year project: IoT-based container tracking for Sri Lanka Customs with smart seal monitoring to ensure cargo security.",
+      tags: ["Final Year Project", "IoT", "GPS", "Real-time"],
+      githubLink: "https://github.com/NimaB990/SecureTrackSL.git",
+      image: containerImg
+    },
+    {
       title: "Smart Bus Tracking System",
       desc: "Real-time GPS tracking system with WebSocket support for passengers, drivers, and admins.",
       tags: ["Flask", "Socket.IO", "Leaflet"],
@@ -43,13 +50,6 @@ const Projects = () => {
       tags: ["SpringBoot", "Postman"],
       githubLink: null,
       image: taskImg
-    },
-    {
-      title: "Container Smart Tracking",
-      desc: "IoT-based container tracking for Sri Lanka Customs with smart seal monitoring to ensure cargo security.",
-      tags: ["IoT", "GPS", "Real-time"],
-      githubLink: "https://github.com/NimaB990/SecureTrackSL.git",
-      image: containerImg
     },
   ];
 
