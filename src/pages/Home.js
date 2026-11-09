@@ -12,7 +12,7 @@ export default function Home() {
           <p className="eyebrow"><span className="accent-line" /> SOFTWARE. INFRASTRUCTURE. POSSIBILITY.</p>
           <p className="hero-intro">Hello, I'm Nimantha.</p>
           <TypingHeadline />
-          <p className="hero-description">Turning ideas into reliable digital experiences. Exploring the intersection of software development, cloud infrastructure, and DevOps.</p>
+          <p className="hero-description">I turn ideas into reliable digital experiences and explore the intersection of software development, cloud infrastructure, and DevOps.</p>
           <div className="hero-actions">
             <a href="#projects" className="button button-primary">Explore my work <FiArrowUpRight aria-hidden="true" /></a>
             <a href="#contact" className="button button-secondary">Let's connect <FiArrowUpRight aria-hidden="true" /></a>

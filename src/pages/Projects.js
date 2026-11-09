@@ -11,21 +11,21 @@ const Projects = () => {
   const projectData = [
     {
       title: "Container Smart Tracking",
-      desc: "Our final-year project: IoT-based container tracking for Sri Lanka Customs with smart seal monitoring to ensure cargo security.",
-      tags: ["Final Year Project", "IoT", "GPS", "Real-time"],
+      desc: "Our final-year project: an IoT-based container tracking system for Sri Lanka Customs, with smart seal monitoring to help protect cargo.",
+      tags: ["Final-Year Project", "IoT", "GPS", "Real-time"],
       githubLink: "https://github.com/NimaB990/SecureTrackSL.git",
       image: containerImg
     },
     {
       title: "Smart Bus Tracking System",
-      desc: "Real-time GPS tracking system with WebSocket support for passengers, drivers, and admins.",
+      desc: "A real-time GPS tracking system with WebSocket support for passengers, drivers, and administrators.",
       tags: ["Flask", "Socket.IO", "Leaflet"],
       githubLink: "https://github.com/NimaB990/Smart-Bus-Tracking-System.git",
       image: busImg
     },
     {
       title: "Smart Attendance System",
-      desc: "Automated RFID and Face Recognition attendance logging with cloud database integration.",
+      desc: "An automated attendance system using RFID and facial recognition, with cloud database integration.",
       tags: ["Python", "OpenCV", "Cloud"],
       githubLink: "https://github.com/NimaB990/Smart-Attendance-system.git",
       image: attendanceImg
@@ -39,7 +39,7 @@ const Projects = () => {
     },
     {
       title: "CRM User Management",
-      desc: "Developed secure RBAC modules and dynamic interfaces for a CRM ecosystem in a team environment.",
+      desc: "Contributed to a team project by developing secure role-based access control modules and dynamic interfaces for a CRM system.",
       tags: ["Go (Golang)", "Vue.js"],
       githubLink: "https://github.com/thanusha-bandara/user-management-module.git",
       image: crmImg
@@ -47,7 +47,7 @@ const Projects = () => {
     {
       title: "Task Management Testing",
       desc: "Implemented global exception handling and rigorous API testing to ensure system reliability.",
-      tags: ["SpringBoot", "Postman"],
+      tags: ["Spring Boot", "Postman"],
       githubLink: null,
       image: taskImg
     },
@@ -56,7 +56,7 @@ const Projects = () => {
   return (
     <section id="projects" className="section projects-section" aria-labelledby="projects-title">
       <div className="shell">
-        <div className="section-heading section-heading-row"><div><p className="eyebrow">02 / SELECTED WORK</p><h2 id="projects-title">Ideas turned into<br /><span className="muted-heading">working solutions.</span></h2></div><p>A selection of projects across full-stack development, connected systems, and reliable APIs.</p></div>
+        <div className="section-heading section-heading-row"><div><p className="eyebrow">02 / SELECTED WORK</p><h2 id="projects-title">Ideas turned into<br /><span className="muted-heading">working solutions.</span></h2></div><p>A selection of projects featuring full-stack applications, connected systems, and reliable APIs.</p></div>
         <div className="projects-grid">
           {projectData.map((project, index) => (
             <article className="project-card" key={project.title}>

@@ -27,7 +27,7 @@ export default function Contact() {
     <section id="contact" className="section contact-section" aria-labelledby="contact-title">
       <div className="shell contact-grid">
         <div className="contact-copy"><p className="eyebrow">03 / GET IN TOUCH</p><h2 id="contact-title">Great things start<br />with a <span className="accent-text">conversation.</span></h2>
-          <p className="contact-intro">Have a project in mind, an opportunity to share, or just want to talk tech? I'd love to hear from you.</p>
+          <p className="contact-intro">Have a project in mind or an opportunity to share? Whether you'd like to collaborate or simply talk about technology, I'd love to hear from you.</p>
           <div className="contact-details">
             <a href="mailto:Nimanthabandara990@gmail.com"><FiMail aria-hidden="true" /><span><small>EMAIL ME</small>Nimanthabandara990@gmail.com</span><FiArrowUpRight aria-hidden="true" /></a>
             <a href="tel:+94776400964"><FiPhone aria-hidden="true" /><span><small>GIVE ME A CALL</small>+94 77 640 0964</span><FiArrowUpRight aria-hidden="true" /></a>
@@ -37,7 +37,7 @@ export default function Contact() {
         </div>
         <form ref={form} onSubmit={sendEmail} className="contact-form" aria-busy={status === 'sending'}>
           <h3>Send a message<span>.</span></h3><p>Tell me a little about what you're working on.</p>
-          <label htmlFor="contact-name">Your name</label><input id="contact-name" name="user_name" autoComplete="name" placeholder="How should I call you?" required disabled={status === 'sending'} />
+          <label htmlFor="contact-name">Your name</label><input id="contact-name" name="user_name" autoComplete="name" placeholder="What should I call you?" required disabled={status === 'sending'} />
           <label htmlFor="contact-email">Email address</label><input id="contact-email" name="user_email" type="email" autoComplete="email" placeholder="you@example.com" required disabled={status === 'sending'} />
           <label htmlFor="contact-message">Your message</label><textarea id="contact-message" name="message" rows="5" placeholder="A project, an idea, or a simple hello..." required disabled={status === 'sending'} />
           <button type="submit" className="button button-primary" disabled={status === 'sending'}>{status === 'sending' ? 'Sending message...' : 'Send message'}<FiArrowRight aria-hidden="true" /></button>
